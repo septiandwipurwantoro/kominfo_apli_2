@@ -1,0 +1,68 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+.bg-shadow {
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.046);
+}
+
+body{
+  background: url(../img/bg.png) center no-repeat;
+  background-size: cover;
+}
+.aside-conten-login {
+  background: url(../img/aside-buble.png) no-repeat;
+  background-repeat: no-repeat;
+  background-color: #4e46e5 !important;
+  background-blend-mode: hard-light;
+  background-size: cover;
+}
+
+.group {
+  position: relative;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.container-1 {
+  padding-top: 30px;
+}
+
+.main-input {
+  font-size: 15px;
+  padding: 5px;
+  display: block;
+  border: none;
+  border-bottom: 1.5px solid #6c6c6c;
+  color: #9ca3af;
+}
+
+.main-input:focus {
+  outline: none;
+  border-bottom: 1.5px solid #1D74F1;
+}
+
+.lebal-email {
+  color: #999999;
+  font-size: 16px;
+  font-weight: semibold;
+  position: absolute;
+  pointer-events: none;
+  left: 0px;
+  top: 0px;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.main-input:focus ~ .lebal-email,
+.main-input:valid ~ .lebal-email {
+  top: -20px;
+  font-size: 14px;
+  color: #1D74F1;
+}

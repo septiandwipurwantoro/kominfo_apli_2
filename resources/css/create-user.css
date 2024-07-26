@@ -1,0 +1,49 @@
+form input {
+  outline: #4f46e5 !important;
+}
+
+#sumber {
+  appearance: none; /* Menghapus panah default */
+  -webkit-appearance: none; /* Safari dan Chrome */
+  -moz-appearance: none; /* Firefox */
+}
+
+.select2-container .select2-selection--single {
+  height: 41px;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f9fafb;
+}
+
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__arrow {
+  height: 40px;
+  right: 10px;
+}
+
+.select2-dropdown {
+  background-color: #f9fafb;
+}
+
+.select2-results__option {
+  padding: 10px;
+  font-size: 14px;
+}
+.select2-container--default
+  .select2-results__option--highlighted.select2-results__option--selectable {
+  background-color: #4f46e5;
+}
+
+.select2-results__option--highlighted {
+  background-color: #e2e2e2;
+}
+.select2-search__field:focus {
+  border: 1px solid #6366f1;
+  outline: none !important;
+}
+.select2-search__field {
+  padding: 4px !important;
+}
