@@ -61,49 +61,6 @@
             </div>
             <div>
                 <label
-                for="nominal"
-                class="block mb-2 text-sm font-medium text-gray-600"
-                >Nominal</label
-                >
-                <input
-                type="number"
-                id="nominal"
-                name="nominal"
-                class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-indigo-500 focus:border-blue-500 block w-full p-2.5"
-                placeholder="Masukkan Nominal"
-                value="{{ $aset->nominal_aset }}"
-                required
-                />
-                @error('nominal')
-                    <span>{{ $message }}</span>
-                @enderror
-            </div>
-            <div class="relative">
-                <label
-                for="sumber"
-                class="block mb-2 text-sm font-medium text-gray-600"
-                >Sumber</label
-                >
-                <select id="sumber" name="sumber" class="text-gray-600 w-full">
-                <option selected class="text-sm">Pilih Sumber</option>
-                <option value="US">United States</option>
-                <option value="CA">Canada</option>
-                <option value="FR">France</option>
-                <option value="DE">Germany</option>
-                <option value="DE">Germany</option>
-                <option value="DE">Germany</option>
-                <option value="DE">Germany</option>
-                <option value="DE">Germany</option>
-                <option value="DE">Germany</option>
-                <option value="DE">Germany</option>
-                <option value="DE">Germany</option>
-                </select>
-                @error('sumber')
-                    <span>{{ $message }}</span>
-                @enderror
-            </div>
-            <div>
-                <label
                 for="jumlah"
                 class="block mb-2 text-sm font-medium text-gray-600"
                 >Jumlah</label
@@ -137,7 +94,19 @@
                     <span>{{ $message }}</span>
                 @enderror
             </div>
-
+            <div>
+                <label
+                  for="bidang"
+                  class="block mb-2 text-sm font-medium text-gray-600"
+                  >Bidang</label
+                >
+                <select id="bidang" name="bidang" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-indigo-500 focus:border-blue-500 block w-full p-2.5">
+                <option selected class="text-sm">Pilih Bidang</option>
+                @foreach ($bidang2x as $bidang)            
+                  <option value="{{$bidang->id}}">{{$bidang->nama_bidang}}</option>
+                @endforeach
+                </select>
+              </div>
             <div class="flex items-center justify-center w-full relative">
                 <svg
                 id="trush-img"

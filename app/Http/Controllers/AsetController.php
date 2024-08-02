@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aset;
+use App\Models\Bidang;
 use App\Models\Log;
+use App\Models\CatatanAset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -17,7 +19,7 @@ class AsetController extends Controller
     {
         // $aset2x = Aset::where('is_confirmed', '1')->where('is_deleted', 0)->paginate(5);
         // return view('page.daftar-aset', ['aset2x' => $aset2x]);
-        $aset2x = Aset::where('is_confirmed', 1)->where('is_deleted', 0)->get();
+        $aset2x = Aset::where('is_deleted', 0)->get();
         return view('pages.asset-page.asset', ['aset2x' => $aset2x]);
     }
 
@@ -27,7 +29,8 @@ class AsetController extends Controller
     public function create()
     {
         // return view('page.buat-aset');
-        return view('pages.asset-page.create-asset');
+        $bidang2x = Bidang::all();
+        return view('pages.asset-page.create-asset', ['bidang2x' => $bidang2x]);
     }
 
     /**
@@ -39,9 +42,8 @@ class AsetController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'nama' => 'required|max:225',
             'diskripsi' => 'required',
-            'nominal' => 'required|numeric',
-            'sumber' => 'required|max:225',
-            'kuantitas' => 'required|numeric'
+            'kuantitas' => 'required|numeric',
+            'bidang' => 'required|numeric'
         ]);
 
         $imageName = time().'.'.$request->image->extension();  
@@ -51,12 +53,9 @@ class AsetController extends Controller
             'foto' => $imageName,
             'nama_aset' => $request->nama,
             'diskripsi' => $request->diskripsi,
-            'nominal_aset' => $request->nominal,	
-            'sumber_aset' => $request->sumber,
             'is_deleted' => 0,
-            'tahun' => date("Y"),
             'kuantitas' => $request->kuantitas,	
-            'is_confirmed' => Auth::user()->is_admin ? 1 : 0,
+            "bidang_id" => $request->bidang
         ]);
 
         Log::create([
@@ -71,6 +70,13 @@ class AsetController extends Controller
     /**
      * Display the specified resource.
      */
+
+    public function show_asset_bidang()
+    {
+        $aset2x = Aset::where('is_deleted', 0)->where('bidang_id', Auth::user()->bidang_id)->get();
+        return view('pages.asset-page.asset-bidang', ['aset2x' => $aset2x]);
+    }
+
     public function show_asset_pending() 
     {
         $aset2x = Aset::where('is_confirmed', 0)->where('is_deleted', 0)->get();
@@ -79,7 +85,7 @@ class AsetController extends Controller
     
     public function show_asset_removed() 
     {
-        $aset2x = Aset::where('is_confirmed', 1)->where('is_deleted', 1)->get();
+        $aset2x = Aset::where('is_deleted', 1)->get();
         return view('pages.asset-page.asset-removed', ['aset2x' => $aset2x]);
     }
 
@@ -121,7 +127,8 @@ class AsetController extends Controller
         // $aset= Aset::find($id);
         // return view('page.edit-aset', ['aset' => $aset]);
         $aset= Aset::find($id);
-        return view('pages.asset-page.edit-asset', ['aset' => $aset]);
+        $bidang2x = Bidang::all();
+        return view('pages.asset-page.edit-asset', ['aset' => $aset, 'bidang2x' => $bidang2x]);
     }
 
     /**
@@ -136,8 +143,6 @@ class AsetController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'nama' => 'required|max:225',
             'diskripsi' => 'required',
-            'nominal' => 'required|numeric',
-            'sumber' => 'required|max:225',
             'kuantitas' => 'required|numeric'
         ]);
 
@@ -155,12 +160,8 @@ class AsetController extends Controller
         ->update([
             'nama_aset' => $request->nama,
             'diskripsi' => $request->diskripsi,
-            'nominal_aset' => $request->nominal,	
-            'sumber_aset' => $request->sumber,
             'is_deleted' => 0,
-            // 'tahun' => date("Y"),
             'kuantitas' => $request->kuantitas,	
-            'is_confirmed' => Auth::user()->is_admin ? 1 : 0,
         ]);
 
         Log::create([
@@ -220,6 +221,7 @@ class AsetController extends Controller
         return back()->with('success', 'Aset telah dihapus');
     }
 
+    
     /**
      * Remove the specified resource from storage.
      */
@@ -240,7 +242,7 @@ class AsetController extends Controller
             'aktivitas_id' => 3
         ]);
 
-        return $aset->is_confirmed ? redirect()->route('asset') : back();
+        return back()->with('success', 'Aset telah dihapus');
     }
 
     public function restore(Request $request) {
@@ -258,12 +260,38 @@ class AsetController extends Controller
             Log::create([
                 'aset_id' => $aset->id,
                 'user_id' => Auth::user()->id,
-                'aktivitas_id' => 5
+                'aktivitas_id' => 4
             ]);
         }
 
         return back()->with('success', 'Aset telah dipulihkan');
     }
+
+    public function adjust(Request $request)
+    {
+        $adjustInput = $request->input('adjustInput');
+        foreach ($adjustInput as $id => $value) {
+            if (is_null($value)) {
+                continue;
+            }
+
+            $aset = Aset::find($id);
+
+            $penyesuaian = $value;
+            $aset->kuantitas += $penyesuaian;
+
+            CatatanAset::create([
+                'user_id' => Auth::user()->id,
+                'aset_id' => $aset->id,
+                'kuantitas' => $penyesuaian,
+                'is_adding' => $penyesuaian > 0 ? true : false
+            ]);
+
+            $aset->save();
+        }
+        return back()->with('success', 'Aset telah disesuaikan');
+    }
+
 
     public function get_data_record() {
         $asets = Aset::selectRaw('DATE(created_at) as date, COUNT(*) as count')

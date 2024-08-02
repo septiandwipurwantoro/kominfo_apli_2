@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AsetController;
 use App\Http\Controllers\LogController;
+use App\Http\Controllers\LogPenyesuaianBarangController;
 
 Route::get('/', function () {
     return redirect()->route('dashboard');;
@@ -20,6 +21,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     // Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('profile/{id}', [UserController::class, 'edit'])->name('profile');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     // Route::get('master-admin', [AdminController::class, 'index'])->name('master-admin');
     // Route::get('master-user', [UserController::class, 'index'])->name('master-user');
@@ -38,6 +40,7 @@ Route::middleware('auth')->group(function () {
     // Route::get('delete-aset/{id}', [AsetController::class, 'delete'])->name('delete-aset');
     // Route::get('confirming-aset/{id}', [AsetController::class, 'update_aset_status'])->name('confirming-aset');
     Route::get('asset', [AsetController::class, 'index'])->name('asset');
+    Route::get('asset-bidang', [AsetController::class, 'show_asset_bidang'])->name('asset-bidang');
     Route::get('asset-pending', [AsetController::class, 'show_asset_pending'])->name('asset-pending');
     Route::get('asset-pending-user/{id}', [AsetController::class, 'show_asset_pending_user'])->name('asset-pending-user');
     Route::get('asset-removed', [AsetController::class, 'show_asset_removed'])->name('asset-removed');
@@ -48,10 +51,12 @@ Route::middleware('auth')->group(function () {
     Route::get('aset-status/{id}', [AsetController::class, 'show_req_status'])->name('aset-status');
     Route::get('delete-asset/{id}', [AsetController::class, 'delete'])->name('delete-asset');
     Route::post('restore-asset', [AsetController::class, 'restore'])->name('restore-asset');
+    Route::post('adjust-asset', [AsetController::class, 'adjust'])->name('adjust-asset');
     Route::post('confirm-asset', [AsetController::class, 'update_asset_status_confirm'])->name('confirm-asset');
     Route::post('reject-asset', [AsetController::class, 'update_asset_status_reject'])->name('reject-asset');
     // Route::get('log-list', [LogController::class, 'index'])->name('log-list');
     Route::get('log', [LogController::class, 'index'])->name('log');
+    Route::get('log-adjestment', [LogPenyesuaianBarangController::class, 'index'])->name('log-adjestment');
 
     Route::get('/data-record.json', [AsetController::class, 'get_data_record']);
 });

@@ -32,9 +32,6 @@ class DatabaseSeeder extends Seeder
                 'nama_aktivitas' => 'Menghapus',
             ],
             [
-                'nama_aktivitas' => 'Mengkonfirmasi',
-            ],
-            [
                 'nama_aktivitas' => 'memulihkan',
             ],
         ]);

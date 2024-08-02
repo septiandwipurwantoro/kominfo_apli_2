@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bidang', function (Blueprint $table) {
+        Schema::create('catatan_asets', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_bidang');
-            $table->timestamps();
+            $table->foreignId('user_id')->index();
+            $table->foreignId('aset_id')->index();
+            $table->integer('kuantitas');
+            $table->boolean('is_adding');
+            $table->timestamp('waktu_input')->useCurrent();
         });
     }
 
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bidang');
+        Schema::dropIfExists('catatan_asets');
     }
 };

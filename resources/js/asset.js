@@ -4,12 +4,9 @@ new DataTable("#dataAsset", {
     { responsivePriority: 1, targets: 0 }, // Kolom No diprioritaskan pertama
     { responsivePriority: 3, targets: 1 }, // Kolom Foto diprioritaskan kedua
     { responsivePriority: 4, targets: 2 }, // Kolom Nama diprioritaskan ketiga
-    { responsivePriority: 10000, targets: 3 }, // Kolom Deskripsi diprioritaskan terakhir
-    { responsivePriority: 5, targets: 4 }, // Kolom Nominal diprioritaskan keempat
-    { responsivePriority: 6, targets: 5 }, // Kolom Sumber diprioritaskan kelima
-    { responsivePriority: 7, targets: 6 }, // Kolom Jumlah diprioritaskan keenam
-    { responsivePriority: 8, targets: 7 }, // Kolom Tahun Upload diprioritaskan ketujuh
-    { responsivePriority: 2, targets: 8 }, // Kolom Aksi diprioritaskan keenam
+    { responsivePriority: 6, targets: 3 }, // Kolom Deskripsi diprioritaskan terakhir
+    { responsivePriority: 5, targets: 4 }, // Kolom Jumlah diprioritaskan keenam
+    { responsivePriority: 2, targets: 5 }, // Kolom Aksi diprioritaskan keenam
   ],
   layout: {
     topCenterEnd: {

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Aset extends Model
 {
@@ -14,12 +15,13 @@ class Aset extends Model
     protected $fillable = [
         'foto',
         'nama_aset',
-        'diskripsi',
-        'nominal_aset',	
-        'sumber_aset',	
-        'is_deleted',	
-        'tahun',	
+        'diskripsi',	
+        'is_deleted',
         'kuantitas',	
-        'is_confirmed',
+        'bidang_id',
     ];
+
+    public function bidang(): BelongsTo {
+        return $this->belongsTo(Bidang::class);
+    }
 }

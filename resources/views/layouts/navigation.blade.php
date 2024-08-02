@@ -134,15 +134,19 @@
             <ul
                 class="view-dropdown-asset hidden list-[circle] ml-5 mt-3 text-[15px]"
             >
-                <li>
+                {{-- <li>
                 <a href="{{ Auth::user()->is_admin ? route('asset-pending') : route('asset-pending-user', ['id' => 21])}}" class="text-sm">Pending</a>
-                </li>
-                <li>
-                <a href="{{ route('asset') }}" class="text-sm">Detail Aset</a>
-                </li>
+                </li> --}}
                 @if (Auth::user()->is_admin)
                 <li>
-                <a href="{{ route('asset-removed') }}" class="text-sm">Removed</a>
+                    <a href="{{ route('asset') }}" class="text-sm">Semua Barang</a>
+                </li>
+                <li>
+                    <a href="{{ route('asset-removed') }}" class="text-sm">Removed</a>
+                </li>
+                @else
+                <li>
+                    <a href="{{ route('asset-bidang') }}" class="text-sm">Barang Bidang</a>
                 </li>
                 @endif
             </ul>
@@ -172,6 +176,29 @@
             <p class="list-aside text-sm mt-1">Log Aktivitas</p>
         </a>
         </li>
+        <li class="flex justify-center mb-7">
+            <a
+                href="{{ route('log-adjestment') }}"
+                class="flex w-10/12 icon-list-aside text-[15px] text-gray-400 gap-4 items-center hover:text-indigo-400 focus:text-indigo-400"
+            >
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.6em"
+                height="1.6em"
+                viewBox="0 0 24 24"
+                >
+                <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.3"
+                    d="M6.209 12.324H4.401c-.579 0-1.048.47-1.048 1.048v6.83c0 .578.47 1.048 1.048 1.048H6.21c.58 0 1.049-.47 1.049-1.049v-6.829a1.05 1.05 0 0 0-1.049-1.049m6.694-9.573h-1.808c-.58 0-1.049.47-1.049 1.049V20.2c0 .58.47 1.049 1.05 1.049h1.807c.58 0 1.049-.47 1.049-1.049V3.8c0-.58-.47-1.049-1.05-1.049m6.696 5.176H17.79c-.58 0-1.049.47-1.049 1.05V20.2c0 .58.47 1.049 1.049 1.049h1.808a1.05 1.05 0 0 0 1.049-1.049V8.976c0-.58-.47-1.049-1.05-1.049"
+                />
+                </svg>
+                <p class="list-aside text-sm mt-1">Log Penyesuaian Barang</p>
+            </a>
+            </li>
         <li class="flex justify-center mb-7">
         <div
             class="flex w-10/12 icon-list-aside text-[15px] text-gray-400 gap-4 items-center hover:text-indigo-400 focus:text-indigo-400"
@@ -259,7 +286,7 @@
             id="items-profile"
             class="items-profile absolute overflow-hidden bg-white divide-y w-40 right-0 top-14 bg-shadow rounded"
         >
-            <a href="" class="flex gap-5 ml-4 py-3">
+            <a href="{{ route('profile', ['id' => Auth::user()->id]) }}" class="flex gap-5 ml-4 py-3">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1.4em"
@@ -280,7 +307,7 @@
                 <path d="M15.5 12a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0" />
                 </g>
             </svg>
-            <p>Seting</p>
+            <p>Profile</p>
             </a>
             <a href="{{ route('logout') }}" class="flex gap-4 text-red-400 ml-4 py-3">
             <svg

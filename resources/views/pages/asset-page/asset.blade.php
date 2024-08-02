@@ -84,10 +84,7 @@
             <th width="180">Foto</th>
             <th width="180">Nama</th>
             <th width="180">Deskripsi</th>
-            <th width="100">Nominal</th>
-            <th width="180">Sumber</th>
             <th width="60">Jumlah</th>
-            <th width="180">Tahun</th>
             <th class="{{!Auth::user()->is_admin ? 'hidden' : ''}}">Aksi</th>
         </tr>
         </thead>
@@ -98,12 +95,9 @@
                 <td><img class="img-fluid" style="width: 18rem;" src="{{ asset('gambar_aset/' . $aset->foto) }}" alt=""></td>
                 <td>{{$aset->nama_aset}}</td>
                 <td>{{$aset->diskripsi}}</td>
-                <td>{{$aset->nominal_aset}}</td>
-                <td>{{$aset->sumber_aset}}</td>
                 <td>{{$aset->kuantitas}}</td>
-                <td>{{$aset->tahun}}</td>
-                {{-- @if (Auth::user()->is_admin)     --}}
-                @if (true)   
+                @if (Auth::user()->is_admin)    
+                {{-- @if (true)    --}}
                 <td class="{{!Auth::user()->is_admin ? 'hidden' : ''}}">
                     <div
                         class="relative toggleAsset cursor-pointer hover:text-indigo-600 w-10 h-10 flex items-center justify-center"

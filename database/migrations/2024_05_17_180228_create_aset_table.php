@@ -16,12 +16,9 @@ return new class extends Migration
             $table->string('foto');
             $table->string('nama_aset');
             $table->text('diskripsi');
-            $table->integer('nominal_aset');
-            $table->string('sumber_aset');
             $table->boolean('is_deleted');
-            $table->year('tahun');
             $table->integer('kuantitas');
-            $table->boolean('is_confirmed');
+            $table->foreignId('bidang_id')->index();
             $table->timestamps();
         });
     }

@@ -3,12 +3,11 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Arr;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Bidang>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CatatanAset>
  */
-class BidangFactory extends Factory
+class CatatanAsetFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +17,7 @@ class BidangFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_bidang' => fake()->unique()->userName(),
+            //
         ];
     }
 }

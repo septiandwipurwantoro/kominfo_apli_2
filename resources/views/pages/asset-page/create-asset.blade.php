@@ -56,34 +56,6 @@
             </div>
             <div>
                 <label
-                for="nominal"
-                class="block mb-2 text-sm font-medium text-gray-600"
-                >Nominal</label
-                >
-                <input
-                type="number"
-                id="nominal"
-                name="nominal"
-                class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-indigo-500 focus:border-blue-500 block w-full p-2.5"
-                placeholder="Masukkan Nominal"
-                required
-                />
-            </div>
-            <div class="relative">
-                <label
-                for="sumber"
-                class="block mb-2 text-sm font-medium text-gray-600"
-                >Sumber</label
-                >
-                <select id="sumber" name="sumber" class="text-gray-600 w-full">
-                <option selected class="text-sm">Pilih Sumber</option>
-                <option value="e-Katalog">e-Katalog</option>
-                <option value="Pengadaan Langsung">Pengadaan Langsung</option>
-                <option value="Hibah">Hibah</option>
-                </select>
-            </div>
-            <div>
-                <label
                 for="jumlah"
                 class="block mb-2 text-sm font-medium text-gray-600"
                 >Jumlah</label
@@ -110,7 +82,19 @@
                 placeholder="Masukkan Deskripsi . . . ."
                 ></textarea>
             </div>
-
+            <div>
+              <label
+                for="bidang"
+                class="block mb-2 text-sm font-medium text-gray-600"
+                >Bidang</label
+              >
+              <select id="bidang" name="bidang" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-indigo-500 focus:border-blue-500 block w-full p-2.5">
+              <option selected class="text-sm">Pilih Bidang</option>
+              @foreach ($bidang2x as $bidang)            
+                <option value="{{$bidang->id}}">{{$bidang->nama_bidang}}</option>
+              @endforeach
+              </select>
+            </div>
             <div class="flex items-center justify-center w-full relative">
                 <svg
                 id="trush-img"

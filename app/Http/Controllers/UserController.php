@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Bidang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -43,7 +44,7 @@ class UserController extends Controller
         User::create([
             'nama_lengkap' => $request->nama,
             'username' => $request->username,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'bidang_id' => $request->bidang,
             'is_admin' => false,
             'is_active' => true
@@ -86,7 +87,7 @@ class UserController extends Controller
         ->update([
             'nama_lengkap' => $request->nama,
             'username' => $request->username,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'bidang_id' => $request->bidang,
         ]);
 
