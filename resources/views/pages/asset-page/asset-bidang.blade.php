@@ -92,6 +92,7 @@
                 <th width="180">Nama</th>
                 <th width="180">Deskripsi</th>
                 <th width="60">Jumlah</th>
+                <th width="60">Input Jumlah</th>
             </tr>
             </thead>
             <tbody>

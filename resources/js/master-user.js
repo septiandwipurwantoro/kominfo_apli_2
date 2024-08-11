@@ -12,7 +12,7 @@ new DataTable("#dataAsset", {
       buttons: [
         {
           extend: "collection",
-          text: "Menu",
+          text: "Export",
           className: "custom-html-collection mt-1",
           buttons: [
             "<b class='ms-2'>Export</b>",
